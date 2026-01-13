@@ -6,9 +6,18 @@ on:
         description: Provide a dummy text to log
         required: true
         type: string
+    outputs:
+      result:
+        description: The string i log
+        value: ${{jobs.deploy-by-reusable.outputs.job-result}}
 jobs:
   deploy-by-reusable:
+    outputs:
+      job-result: ${{steps.set-output-on-step.outputs.stepResult}}
     runs-on: ubuntu-latest
     steps:
       - name: Output dummy
         run: echo "${{inputs.dummy}}"
+      - name: Set output
+        id: set-output-on-step
+        run: echo "stepResult=Hello from output" >> $GITHUB_OUTPUT

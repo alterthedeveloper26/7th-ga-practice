@@ -19,3 +19,9 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       dummy: Hello world
+  output-reusable-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output from reusable
+        run: echo "${{needs.deploy.outputs.workflow-result}}"
