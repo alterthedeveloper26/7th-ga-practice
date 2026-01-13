@@ -1,8 +1,14 @@
 name: reusable-deploy
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      dummy:
+        description: Provide a dummy text to log
+        required: true
+        type: string
 jobs:
-  deploy:
+  deploy-by-reusable:
     runs-on: ubuntu-latest
     steps:
       - name: Output dummy
-        run: echo "Hello World"
+        run: echo "${{inputs.dummy}}"
